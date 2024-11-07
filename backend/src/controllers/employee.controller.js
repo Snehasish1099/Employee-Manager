@@ -3,6 +3,7 @@ import { asyncHandler } from "../utils/asyncHandler.js"
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { ApiError } from "../utils/ApiError.js"
 
+/* Create Employee */
 const createEmployee = asyncHandler(async (req, res) => {
     let { name, email, phoneNo, gender, designation, course } = req.body
     if ([name, email, phoneNo].some((item) => item?.trim() === "")) {
@@ -30,6 +31,7 @@ const createEmployee = asyncHandler(async (req, res) => {
     )
 })
 
+/** Get Single Employee details */
 const getEmployee = asyncHandler(async (req, res) => {
     const { id } = req.params
 
@@ -43,10 +45,11 @@ const getEmployee = asyncHandler(async (req, res) => {
     )
 })
 
+/** Get all Employees */
 const getAllEmployees = asyncHandler(async (req, res) => {
     const employees = await Employee.find().select("-designation -gender -course")
     if (!employees || employees.length === 0) {
-        throw new ApiError(404, "No employees found")
+        throw new ApiError(404, "No Employees found")
     }
 
     return res.status(200).json(
@@ -54,6 +57,7 @@ const getAllEmployees = asyncHandler(async (req, res) => {
     )
 })
 
+/** Edit Employee details */
 const updateEmployee = asyncHandler(async (req, res) => {
     const { id } = req.params
     const { name, email, phoneNo, gender, designation, course } = req.body
@@ -74,6 +78,7 @@ const updateEmployee = asyncHandler(async (req, res) => {
     )
 })
 
+/** Delete Employee by Id */
 const deleteEmployee = asyncHandler(async (req, res) => {
     const { id } = req.params
 
@@ -89,16 +94,16 @@ const deleteEmployee = asyncHandler(async (req, res) => {
     )
 })
 
+/** Toggle enable/disable an Employee */ // status - 'enable' or 'disable'
 const enableDisableEmployee = asyncHandler(async (req, res) => {
     const { id } = req.params
-    const { status } = req.body  
+    const { status } = req.body
 
     const employee = await Employee.findById(id)
     if (!employee) {
         throw new ApiError(404, "Employee not found")
     }
-    
-    // status - 'enable' or 'disable'
+
     if (!['enable', 'disable'].includes(status)) {
         throw new ApiError(400, "Error while trying to enable/disable, please try again.")
     }
