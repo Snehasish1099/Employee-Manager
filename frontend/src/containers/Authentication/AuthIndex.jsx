@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { ForLogin } from './Hooks'
 import SnackBarComponent from '../../common/Snackbar'
 import LoginPage from '../../components/Authentication/LoginPage'
@@ -20,11 +20,6 @@ const AuthenticationMain = () => {
         checked,
         handleCheck
     } = ForLogin()
-
-    useEffect(() => {
-      console.log(notification, "# notification")
-    }, [notification])
-    
 
     return (
         <div>

@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import { Alert, IconButton, Snackbar } from "@mui/material";
 import DriveFolderUploadIcon from "@mui/icons-material/DriveFolderUpload";
-// import success from '../images/commonImages/greentick.svg'
-// import error from '.../images/commonImages/deleteImg.svg'
-// import warning from '../images/commonImages/warning.svg'
 
 const SnackBarComponent = (props) => {
     const [state, setState] = useState({
@@ -12,24 +9,6 @@ const SnackBarComponent = (props) => {
         horizontal: 'center',
     });
     const { vertical, horizontal } = state;
-
-    // const handleClick = (newState) => () => {
-    //     setState({ open: true, ...newState });
-    // };
-
-    // const handleClose = () => {
-    //     setState({ ...state, open: false });
-    // };
-
-    // const buttons = (
-    //     <Button
-    //         onClick={handleClick({
-    //             vertical: 'bottom',
-    //             horizontal: 'right',
-    //         })}
-    //     >
-    //     </Button>
-    // )
 
     return (
         <div>
@@ -58,12 +37,12 @@ const SnackBarComponent = (props) => {
                                     :
                                     props.alertType === 'warning' && 'bg-yellow-300'
                     }}
-                    icon={props.alertType === 'success' ? <img src={""} alt="success" />
-                        :
-                        props.alertType === 'error' ? <img src={""} alt="error"  height={5} width={35} />
-                            :
-                            props.alertType === 'warning' ? <img src={""} alt="warning" height={5} width={35} />
-                                : false}
+                    // icon={props.alertType === 'success' ? <img src={""} alt="success" />
+                    //     :
+                    //     props.alertType === 'error' ? <img src={""} alt="error"  height={5} width={35} />
+                    //         :
+                    //         props.alertType === 'warning' ? <img src={""} alt="warning" height={5} width={35} />
+                    //             : false}
                 >
                     <div className={`flex w-[100%] justify-between`}>
                         {props.alertType === 'success' ? <p className={`text-white`}>{props.notificationText}</p>

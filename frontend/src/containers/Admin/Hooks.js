@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { BASE_URL } from "../../utils/constant"
-import { doDeleteApiCall, doGetApiCall, doPostApiCall, doPutApiCall } from "../../utils/ApiConfig"
+import { doGetApiCall, doPostApiCall, doPutApiCall } from "../../utils/ApiConfig"
 import { useDispatch } from "react-redux";
 import { storeEmployeesList } from "./EmployeeReducer";
 import _ from "lodash"
@@ -81,10 +81,12 @@ export const ForAdmin = () => {
                 course: employee.course,
             }
         }
+        
         let res = await doPostApiCall(data)
         if (res?.success) {
             openMessage("success", "Success", res?.message, "success")
             setEmployeeForm(!employeeForm)
+            getEmployeeListApiCall()
         } else {
             openMessage("error", "Error", res?.message, "error")
         }
@@ -128,25 +130,10 @@ export const ForAdmin = () => {
                 gender: employeeData.gender,
             }
         }
+
         let res = await doPutApiCall(data)
         if (res?.success) {
             setEmployeeForm(!employeeForm)
-            getEmployeeListApiCall()
-            openMessage("success", "Success", res?.message, "success")
-        } else {
-            openMessage("error", "Error", res?.message, "error")
-        }
-    }
-
-
-    // Emable/Disable Employee 
-    const employeeEnableDisableApiCall = async (userId, queryVal, type) => {
-        let checkVal = queryVal === 1 ? 'enable' : 'disable'
-        let data = {
-            url: type ? `${BASE_URL}/users/${userId}?type=${checkVal}` : `${BASE_URL}/users/${userId}`
-        }
-        let res = await doDeleteApiCall(data)
-        if (res?.success) {
             getEmployeeListApiCall()
             openMessage("success", "Success", res?.message, "success")
         } else {
@@ -159,6 +146,7 @@ export const ForAdmin = () => {
         toggleEmployeeForm,
         employeeFormData,
         adminNotification,
+        messageClose,
         createEmployeeApiCall,
         getEmployeeListApiCall,
         updateEmployeeApiCall,
