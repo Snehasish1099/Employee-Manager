@@ -25,6 +25,7 @@ const generateAccessAndRefereshTokens = async (userId) => {
     }
 }
 
+// Login and its validation for Admin 
 const adminLogin = asyncHandler(async (req, res) => {
 
     const { name, password } = req.body

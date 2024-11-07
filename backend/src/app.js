@@ -15,6 +15,6 @@ app.use(cors({
 app.use(cookieParser())
 
 app.use("/api/auth/", adminRouter)
-app.use("/api/admin/employees/", employeeRouter)
+app.use("/api/admin/", employeeRouter)
 
 export { app }
