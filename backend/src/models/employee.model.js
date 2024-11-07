@@ -45,7 +45,7 @@ const employeeSchema = new mongoose.Schema({
     },
     enabled: {
         type: Number,
-        default: 1, //0:delete, 1:user, 2:disable
+        default: 1, //0:delete, 1:enable, 2:disable
     },
     isVerified: {
         type: Number,
