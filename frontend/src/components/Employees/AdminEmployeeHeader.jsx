@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import TextFieldInput from '../../common/TextFieldInput';
-import { InputAdornment } from '@mui/material';
+// import { InputAdornment } from '@mui/material';
 import ButtonField from '../../common/ButtonField';
 import DropDownField from '../../common/DropDownField';
 
@@ -10,6 +10,8 @@ const AdminEmployeeHeader = (props) => {
     const filterArr = [
         { name: "Name A-Z", value: "name-az" },
         { name: "Name Z-A", value: "name-za" },
+        { name: "New-Old", value: "new-old" },
+        { name: "Old-New", value: "old-new" },
     ]
 
     return (
@@ -23,10 +25,12 @@ const AdminEmployeeHeader = (props) => {
                         placeholder={`Search`}
                         id="outlined-basic"
                         variant="outlined"
-                        startAdornment={
-                            <InputAdornment position={"start"}>
-                                <img src={'search'} alt='search' />
-                            </InputAdornment>}
+                        // startAdornment={
+                        //     <InputAdornment position={"start"}>
+                        //         <img src={'search'} alt='search' />
+                        //     </InputAdornment>
+                        // }
+                        fullWidth
                         onChange={props.onChange}
                     />
                 }
@@ -40,6 +44,7 @@ const AdminEmployeeHeader = (props) => {
                         // filterImg={true}
                         handleChange={(e) => {
                             setDropdownName(e.target.value);
+                            props.getEmployeeListApiCall(e.target.value)
                         }}
                         placeholder="Filter"
                         // name={selectArr}

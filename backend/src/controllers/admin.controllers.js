@@ -5,23 +5,19 @@ import { ApiResponse } from "../utils/ApiResponse.js";
 import { ApiError } from "../utils/ApiError.js"
 
 
-const generateAccessAndRefereshTokens = async (userId) => {
+const generateAccessAndRefreshTokens = async (userId) => {
     try {
-        const admin = await Admin.findById(userId)
-        const accessToken = admin.generateAccessToken()
-        const refreshToken = admin.generateRefreshToken()
+        const user = await Admin.findById(userId)
+        const accessToken = user.generateAccessToken()
+        const refreshToken = user.generateRefreshToken()
 
-        admin.refreshToken = refreshToken
-        await admin.save({ validateBeforeSave: false })
+        user.refreshToken = refreshToken
+        await user.save({ validateBeforeSave: false })
 
         return { accessToken, refreshToken }
 
     } catch (error) {
-        return res.status(500).json({
-            success: false,
-            message: error?.message || "Something went wrong",
-            errors: []
-        });
+        throw new ApiError(500, "Something went wrong while generating referesh and access token")
     }
 }
 
@@ -46,7 +42,7 @@ const adminLogin = asyncHandler(async (req, res) => {
         throw new ApiError(401, "Invalid credentials")
     }
 
-    const { accessToken, refreshToken } = await generateAccessAndRefereshTokens(user._id)
+    const { accessToken, refreshToken } = await generateAccessAndRefreshTokens(user._id)
 
     const loggedInUser = await Admin.findById(user._id).select("-password -refreshToken")
 
@@ -59,7 +55,7 @@ const adminLogin = asyncHandler(async (req, res) => {
         new ApiResponse(
             200,
             { user: loggedInUser, accessToken, refreshToken },
-            "User logged In Successfully"
+            "Admin logged In Successfully"
         )
     )
 })
@@ -77,7 +73,7 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
             process.env.REFRESH_TOKEN_SECRET
         )
 
-        const user = await User.findById(decodedToken?._id)
+        const user = await Admin.findById(decodedToken?._id)
 
         if (!user) {
             throw new ApiError(401, "Invalid refresh token")
@@ -92,7 +88,7 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
             secure: true
         }
 
-        const { accessToken, newRefreshToken } = await generateAccessAndRefereshTokens(user._id)
+        const { accessToken, newRefreshToken } = await generateAccessAndRefreshTokens(user._id)
 
         return res
             .status(200)
@@ -112,5 +108,6 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
 
 export {
     adminLogin,
-    refreshAccessToken
+    refreshAccessToken,
+    generateAccessAndRefreshTokens
 }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { ForLogin } from './Hooks'
 import SnackBarComponent from '../../common/Snackbar'
 import LoginPage from '../../components/Authentication/LoginPage'
@@ -7,8 +7,8 @@ const AuthenticationMain = () => {
 
     const {
         Login,
-        handleEmailAddress,
-        handlePasswordAddress,
+        handleName,
+        handlePassword,
         passwordErrorMessage,
         emailErrorMessage,
         message,
@@ -21,12 +21,17 @@ const AuthenticationMain = () => {
         handleCheck
     } = ForLogin()
 
+    useEffect(() => {
+      console.log(notification, "# notification")
+    }, [notification])
+    
+
     return (
         <div>
             <LoginPage
                 Login={() => Login()}
-                setEmail={(e) => handleEmailAddress(e)}
-                setPassword={(e) => handlePasswordAddress(e)}
+                setName={(e) => handleName(e)}
+                setPassword={(e) => handlePassword(e)}
                 emailErrorMessage={emailErrorMessage}
                 message={message}
                 passwordErrorMessage={passwordErrorMessage}
