@@ -5,7 +5,6 @@ import EmployeeList from './EmployeeList'
 
 const EmployeeIndex = (props) => {
 
-
     return (
         <div>
             {props.employeeForm ? (
@@ -15,9 +14,9 @@ const EmployeeIndex = (props) => {
                         <div className='w-full'>
                             <EmployeeForm
                                 toggleEmployeeForm={props.toggleEmployeeForm}
-                                createNewUserByAdmin={props.createNewUserByAdmin}
+                                createEmployeeApiCall={props.createEmployeeApiCall}
                                 employeeFormData={props.employeeFormData}
-                                editUserApi={props.editUserApi}
+                                updateEmployeeApiCall={props.updateEmployeeApiCall}
                                 totalUserCreateMsg={props.totalUserCreateMsg}
                                 loading={props.loading}
                             />
@@ -31,9 +30,9 @@ const EmployeeIndex = (props) => {
                         dropDown={true}
                         addBtn={true}
                         toggleEmployeeForm={props.toggleEmployeeForm}
-                        getAllUsers={props.getAllUsers}
-                        onChange={props.handleSearchUser}
+                        onChange={props.handleSearchEmployee}
                         search={true}
+                        getEmployeeListApiCall={props.getEmployeeListApiCall}
                     />
                     <div className={`overflow-y-auto h-[75vh]`}>
                         <EmployeeList

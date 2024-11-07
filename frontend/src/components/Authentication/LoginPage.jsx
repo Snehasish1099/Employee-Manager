@@ -31,8 +31,8 @@ const LoginPage = (props) => {
                     <ClickAwayListener onClickAway={() => setMailFocused(false)}>
                         <div onClick={() => setMailFocused(true)} className='w-1/2'>
                             <TextFieldInput
-                                handelChange={(e) => props.setEmail(e)}
-                                floatingLabel={mailFocused === true ? '*Email ID' : null}
+                                handelChange={(e) => props.setName(e)}
+                                floatingLabel={"Username"}
                                 focused={mailFocused}
                                 onKeyPress={props.Login}
                                 textnewclass={`w-full `}
@@ -67,7 +67,7 @@ const LoginPage = (props) => {
                     </ClickAwayListener>
 
                     <ButtonField
-                        onClick={props.Login}
+                        onClick={() => props.Login()}
                         buttonName={text.Login}
                         buttonextracls={`px-2 py-2 text-white ${props.loading === true && 'bg-grey-300'} bg-orange-600 text-sm w-1/2 hover:bg-blue-400 hover:text-black`}
                         loading={props.loading}

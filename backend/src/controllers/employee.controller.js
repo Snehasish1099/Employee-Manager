@@ -47,15 +47,52 @@ const getEmployee = asyncHandler(async (req, res) => {
 
 /** Get all Employees */
 const getAllEmployees = asyncHandler(async (req, res) => {
-    const employees = await Employee.find().select("-designation -gender -course")
+    const { string, sort } = req.query;
+
+    let filter = {};
+    if (string) {
+        filter = {
+            $or: [
+                { name: { $regex: string, $options: 'i' } },
+                { email: { $regex: string, $options: 'i' } },
+                { phoneNo: { $regex: string, $options: 'i' } },
+                { gender: { $regex: string, $options: 'i' } },
+                // { designation: { $regex: string, $options: 'i' } },
+                // { course: { $regex: string, $options: 'i' } },
+            ]
+        };
+    }
+
+    let sortObj = {};
+    switch (req.query.sort) {
+        case "name-az":
+            sortObj.name = 1;
+            break;
+        case "name-za":
+            sortObj.name = -1;
+            break;
+        case "new-old":
+            sortObj.createdAt = -1;
+            break;
+        case "old-new":
+            sortObj.createdAt = 1;
+            break;
+        default:
+            sortObj.createdAt = -1;
+            break;
+    }
+
+    const employees = await Employee.find(filter).sort(sortObj);
+
     if (!employees || employees.length === 0) {
-        throw new ApiError(404, "No Employees found")
+        throw new ApiError(404, "No Employees found");
     }
 
     return res.status(200).json(
         new ApiResponse(200, employees, "Employees found")
-    )
-})
+    );
+});
+
 
 /** Edit Employee details */
 const updateEmployee = asyncHandler(async (req, res) => {

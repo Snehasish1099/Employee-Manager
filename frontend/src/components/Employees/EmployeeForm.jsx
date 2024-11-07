@@ -16,13 +16,18 @@ const EmployeeForm = (props) => {
     control,
     getValues,
     formState: { errors }
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      designation: props.employeeFormData?.designation ? props.employeeFormData?.designation : '',
+      course: props.employeeFormData?.course ? props.employeeFormData?.course : ''
+    }
+  });
 
   const onSubmit = (data) => {
-    console.log(data, "#");
-    // props.employeeFormData && Object.keys(props.employeeFormData)?.length > 0 ?
-    //   props.editUserApi(data)
-    //   : props.createNewUserByAdmin(data)
+    props.employeeFormData && Object.keys(props.employeeFormData)?.length > 0 ?
+      props.updateEmployeeApiCall(data)
+      :
+      props.createEmployeeApiCall(data)
 
     reset({
       name: '',
@@ -46,14 +51,21 @@ const EmployeeForm = (props) => {
   ]
 
   const courseArr = [
-    { name: "Account", value: "Account" },
-    { name: "Dashboard", value: "Dashboard" },
-    { name: "Total Users", value: "Total Users" },
-    { name: "Total Vendors", value: "Total Vendors" },
-    { name: "Subscription", value: "Subscription" },
-    { name: "Categories", value: "Categories" },
-    { name: "Support", value: "Support" },
-    { name: "CMS page", value: "CMS page" }
+    { name: "BCA", value: "bca" },
+    { name: "MCA", value: "mca" },
+    { name: "B.Tech", value: "btech" },
+    { name: "M.Tech", value: "mtech" },
+    { name: "B.Sc", value: "bsc" },
+    { name: "M.Sc", value: "msc" },
+  ]
+
+  const designationArr = [
+    { name: "Software Developer", value: "sde" },
+    { name: "DevOps", value: "devops" },
+    { name: "AI/ML Engg.", value: "ai-ml engg." },
+    { name: "Product Manager", value: "manager" },
+    { name: "CEO", value: "ceo" },
+    { name: "HR", value: "hr" },
   ]
 
   return (
@@ -172,8 +184,10 @@ const EmployeeForm = (props) => {
 
               {/* Gender  */}
               <div className='flex flex-col '>
-                <Controller name={'gender'}
+                <Controller
+                  name={'gender'}
                   control={control}
+                  defaultValue={props.employeeFormData?.gender}
                   rules={{
                     required: true
                   }}
@@ -205,11 +219,11 @@ const EmployeeForm = (props) => {
                   render={({ field: { onChange, value }, fieldState: { error } }) => {
                     return (
                       (<DropDownField
-                        name='governorate'
-                        id='governorate'
+                        name='designation'
+                        id='designation'
                         dropDownRootCls={`bg-white`}
                         size="small"
-                        selectOption={courseArr}
+                        selectOption={designationArr}
                         placeholder={`Enter Designation`}
                         option={value}
                         handleChange={(e) => onChange(e.target.value)}

@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { doPostApiCall } from "../../utils/ApiConfig";
+import { BASE_URL } from "../../utils/constant";
 
 export const ForLogin = () => {
 
-    const [email, setEmail] = useState('')
+    const [name, setName] = useState('')
     const [password, setPassword] = useState('')
     const [loading, setLoading] = useState(false)
 
@@ -46,65 +47,46 @@ export const ForLogin = () => {
         }
     };
 
-    const handleEmailAddress = (e) => {
-        setEmail(e.target.value)
+    const handleName = (e) => {
+        setName(e.target.value)
     }
 
-    const handlePasswordAddress = (e) => {
+    const handlePassword = (e) => {
         setPassword(e.target.value)
     }
 
     // Login API call 
     const Login = async () => {
-        setLoading(true)
         let data = {
-            // url: `${SUB_ADMIN_API}/users/login`,
+            url: `${BASE_URL}/auth/login`,
             bodyData: {
-                email: email,
+                name: name,
                 password: password
             }
         }
-        const emalRegex = /^[\w]{1,}[\w.+-]{0,}@[\w-]{2,}([.][a-zA-Z]{2,}|[.][\w-]{2,}[.][a-zA-Z]{2,})$/i;
-        if (!emalRegex.test(email)) {
-            setLoading(false)
-        }
-        else {
-            const res = await doPostApiCall(data)
-            if (!res?.error && res?.status === 200) {
-                setLoading(false)
-                openMessageLogin("success", "Success", res?.message, "success")
-                // const decryptResult1 = await encryptDecrypt(res?.result, 'd')
-                // localStorage.setItem("name", decryptResult1?.name);
-                // localStorage.setItem("email", decryptResult1?.email)
-                // localStorage.setItem("userId", decryptResult1?.id);
-                // decryptResult1?.role === 'admin' ? navigate(`/admin/dashboard`)
-                //     :
-                //     decryptResult1?.role === 'employee' && navigate(`/user`)
-            } else if (res?.status === 403) {
-                setLoading(false)
-                openMessageLogin("warning", "Warning", res?.message, "warning")
-                setLoginError({
-                    code: res?.code,
-                    error: res?.error,
-                    message: res?.message
-                })
-            } else {
-                setLoading(false)
-                openMessageLogin("error", "Error", res?.message, "error")
-                setLoginError({
-                    code: res?.code,
-                    error: res?.error,
-                    message: res?.message
-                })
-            }
-        }
+
+        const res = await doPostApiCall(data)
+        console.log(res, "# res")
+        // if (res?.success && res?.statusCode === 200) {
+        //     openMessageLogin("success", "Success", res?.message, "success")
+        //     localStorage.setItem("name", res?.data)
+        //     navigate('/admin/dashboard')
+        // } else {
+        //     openMessageLogin("error", "Error", res?.message, "error")
+        //     setLoginError({
+        //         code: res?.code,
+        //         error: res?.error,
+        //         message: res?.message
+        //     })
+        // }
     }
 
     return {
         notification,
         openMessageLogin,
-        handleEmailAddress,
-        handlePasswordAddress,
-        loginError
+        handleName,
+        handlePassword,
+        loginError,
+        Login
     }
 }

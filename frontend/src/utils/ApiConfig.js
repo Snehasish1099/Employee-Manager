@@ -9,7 +9,7 @@ export const doGetApiCall = async (data) => {
             headers: {
                 "Content-Type": "application/json",
                 Accept: "application/json",
-                Authorization: token || "",
+                Authorization: token || "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
             },
         };
         fetch(data.url, reqstValues)
@@ -37,7 +37,7 @@ export const doPostApiCall = async (data) => {
             headers: {
                 "Content-Type": "application/json",
                 Accept: "application/json",
-                Authorization: token || "",
+                Authorization: token || "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
             },
         };
         fetch(data.url, reqstValues)
@@ -72,7 +72,7 @@ export const doDeleteApiCall = async (data) => {
             headers: {
                 "Content-Type": "application/json",
                 Accept: "application/json",
-                Authorization: token || "",
+                Authorization: token || "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
             },
         };
         fetch(data.url, reqstValues)
@@ -100,7 +100,7 @@ export const doPutApiCall = async (data) => {
             headers: {
                 "Content-Type": "application/json",
                 Accept: "application/json",
-                Authorization: token || "",
+                Authorization: token || "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
             },
         };
         fetch(data.url, reqstValues)
