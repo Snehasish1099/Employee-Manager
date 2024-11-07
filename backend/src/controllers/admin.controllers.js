@@ -28,7 +28,6 @@ const generateAccessAndRefereshTokens = async (userId) => {
 const adminLogin = asyncHandler(async (req, res) => {
 
     const { name, password } = req.body
-    console.log(email);
 
     if (!name) {
         throw new ApiError(400, "username is required")
