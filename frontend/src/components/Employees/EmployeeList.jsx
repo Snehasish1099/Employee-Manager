@@ -36,7 +36,7 @@ const EmployeeList = (props) => {
                             <thead className='bg-white sticky top-0 z-10'>
                                 <tr className='h-10 '>
                                     <th className={` text-[#585F71]  text-base`}>{'Unique Id'}</th>
-                                    <th className={` text-[#585F71]  text-base`}>{`User Name`}</th>
+                                    <th className={`text-left text-[#585F71]  text-base`}>{`User Name`}</th>
                                     <th className={`text-left text-[#585F71]  text-base`}>{`Email id`}</th>
                                     <th className={`text-left text-[#585F71]  text-base`}>{'Mobile No.'}</th>
                                     <th className={`text-left text-[#585F71]  text-base`}>{'Designation'}</th>
@@ -53,10 +53,10 @@ const EmployeeList = (props) => {
                                             key={idx}
                                             className={`overflow-x-auto drop-shadow-md border-t-2 border-b-2 z-10 border-[#EBEBEB] cursor-pointer h-16`}
                                         >
-                                            <td className={` text-[14px] `}>{user?._id}</td>
+                                            <td className={`text-center text-[14px] `}>{user?._id}</td>
                                             <td className={`flex h-16 items-center px-[7%]`}>
                                                 <Tooltip title={user?.name}>
-                                                    <p className={` text-[#1F2533] text-sm px-2 truncate`}>
+                                                    <p className={` text-[#1F2533] text-sm truncate`}>
                                                         {user?.name}
                                                     </p>
                                                 </Tooltip>

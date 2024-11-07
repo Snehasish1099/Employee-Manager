@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import EmployeeIndex from '../../components/Employees'
 import { ForAdmin } from './Hooks'
+import SnackBarComponent from '../../common/Snackbar'
 
 const AdminEmployeeIndex = () => {
 
@@ -11,7 +12,9 @@ const AdminEmployeeIndex = () => {
     getEmployeeListApiCall,
     updateEmployeeApiCall,
     searchString,
-    handleSearchEmployee
+    handleSearchEmployee,
+    adminNotification,
+    messageClose
   } = ForAdmin()
 
 
@@ -30,6 +33,14 @@ const AdminEmployeeIndex = () => {
         updateEmployeeApiCall={updateEmployeeApiCall}
         handleSearchEmployee={handleSearchEmployee}
         getEmployeeListApiCall={getEmployeeListApiCall}
+      />
+      <SnackBarComponent
+        messageOpen={adminNotification.open}
+        messageClose={messageClose}
+        notificationText={adminNotification.message}
+        subText={adminNotification.subText}
+        alertType={adminNotification.alertType}
+        borderClass={adminNotification.borderClass}
       />
     </div>
   )

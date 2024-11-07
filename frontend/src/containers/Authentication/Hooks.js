@@ -66,19 +66,14 @@ export const ForLogin = () => {
         }
 
         const res = await doPostApiCall(data)
-        console.log(res, "# res")
-        // if (res?.success && res?.statusCode === 200) {
-        //     openMessageLogin("success", "Success", res?.message, "success")
-        //     localStorage.setItem("name", res?.data)
-        //     navigate('/admin/dashboard')
-        // } else {
-        //     openMessageLogin("error", "Error", res?.message, "error")
-        //     setLoginError({
-        //         code: res?.code,
-        //         error: res?.error,
-        //         message: res?.message
-        //     })
-        // }
+        if (res?.success && res?.statusCode === 200) {
+            openMessageLogin("success", "Success", res?.message, "success")
+            localStorage.setItem("name", res?.data?.user?.name)
+            localStorage.setItem('token', res?.data?.accessToken)
+            navigate('/admin/dashboard')
+        } else {
+            openMessageLogin("error", "Error", res?.message, "error")
+        }
     }
 
     return {
@@ -87,6 +82,7 @@ export const ForLogin = () => {
         handleName,
         handlePassword,
         loginError,
-        Login
+        Login,
+        messageClose
     }
 }

@@ -9,11 +9,7 @@ import { NavLink, useLocation } from 'react-router-dom';
 import { adminSideNavbarData } from './adminSideNavbarData';
 
 const SideNavbar = () => {
-  const location = useLocation();
-
-  const role = localStorage.getItem('role')
-  const selectedUserDetailsData = JSON.parse(localStorage.getItem('sections'))
-  const filteredSideMenu = adminSideNavbarData?.filter((itemMenu) => selectedUserDetailsData?.some((filMenu) => filMenu?.name === itemMenu?.name))
+  // const location = useLocation();
 
   const activeStyle = {
     backgroundColor: "#FFE3D4",
@@ -50,10 +46,15 @@ const SideNavbar = () => {
                       ({ isActive }) => isActive ? activeStyle : style
                     }
                     className={`w-full`}
+                    onClick={() => {
+                      if (item?.name === "Logout") {
+                        localStorage.clear()
+                      }
+                    }}
                   >
                     <ListItemButton className='py-4'>
                       <ListItemIcon>
-                        <img src={location?.pathname === item?.link ? item?.colorIcon : item?.icon} alt="icon" className="" />
+                        {/* <img src={location?.pathname === item?.link ? item?.colorIcon : item?.icon} alt="icon" className="" /> */}
                       </ListItemIcon>
                       <p className={`capitalize`}>{item?.name}</p>
                     </ListItemButton>

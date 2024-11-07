@@ -19,11 +19,11 @@ const AdminIndex = () => {
                 readNotificationApi={readNotificationApi}
                 getNotification={getNotification}
             /> */}
-            <div className={`w-full flex h-screen pt-5`}>
-                <div className={`w-[15%] bg-white`}>
+            <div className={`w-full flex h-screen`}>
+                <div className={`w-[10%] bg-white`}>
                     <SideNavbar />
                 </div>
-                <div className='w-[85%] bg-gray-100'>
+                <div className='w-[90%] bg-gray-100'>
                     <Outlet />
                 </div>
             </div>
