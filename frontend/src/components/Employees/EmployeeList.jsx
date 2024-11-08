@@ -70,7 +70,7 @@ const EmployeeList = (props) => {
                                             <td className={` text-[14px] capitalize`}>{user?.designation}</td>
                                             <td className={` text-[14px] capitalize`}>{user?.gender}</td>
                                             <td className={` text-[14px] capitalize`}>{user?.course}</td>
-                                            <td className={` text-[14px] `}>{user?.createdAt}</td>
+                                            <td className={` text-[14px] `}>{new Date(user?.createdAt)?.toLocaleString()}</td>
 
                                             <td className={`pr-10 text-[14px] text-[#1F2533] relative`}>
                                                 <div className='flex justify-between'>
