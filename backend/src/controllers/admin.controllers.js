@@ -27,13 +27,27 @@ const adminLogin = asyncHandler(async (req, res) => {
     const { name, password } = req.body
 
     if (!name) {
-        throw new ApiError(400, "username is required")
+        // throw new ApiError(400, "username is required")
+        return res.status(400).json(
+            new ApiResponse(
+                404,
+                { },
+                "Username is required"
+            )
+        )
     }
 
     const user = await Admin.findOne({ name })
 
     if (!user) {
-        throw new ApiError(404, "Admin does not exist")
+        // throw new ApiError(404, "Admin does not exist")
+        return res.status(404).json(
+            new ApiResponse(
+                404,
+                { },
+                "Invalid Credentials"
+            )
+        )
     }
 
     // const isPasswordValid = await user.isPasswordCorrect(password)
@@ -60,9 +74,15 @@ const adminLogin = asyncHandler(async (req, res) => {
             )
         )
     } else {
-        throw new ApiError(404, "Invalid credentials")
+        // throw new ApiError(404, "Invalid credentials")
+        return res.status(404).json(
+            new ApiResponse(
+                404,
+                { },
+                "Invalid Credentials"
+            )
+        )
     }
-
 })
 
 const refreshAccessToken = asyncHandler(async (req, res) => {

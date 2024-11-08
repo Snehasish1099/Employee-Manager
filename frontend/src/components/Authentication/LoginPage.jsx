@@ -36,7 +36,7 @@ const LoginPage = (props) => {
                                 focused={mailFocused}
                                 onKeyPress={props.Login}
                                 textnewclass={`w-full `}
-                                placeholder={`${text.enter} ${text.email}`}
+                                // placeholder={`${text.enter} Useername`}
                             />
                             {props.emailErrorMessage && <p className={`error-message text-red-600 text-xs p-0 m-0`}>*{props.emailErrorMessage}</p>}
                         </div>
